@@ -2,6 +2,8 @@
 # テキスト処理モジュール
 # ============================================================================
 
+using StatsBase: countmap
+
 """
 テキストを単語に分割し、句読点と短い単語を除去する
 """
@@ -15,16 +17,11 @@ end
 与えられたトークンの単語頻度を計算する
 """
 function calculate_tf(tokens::Vector{<:AbstractString})
-    tf = Dict{String, Float64}()
-    total = length(tokens)
+    total_tokens = length(tokens)
+    total_tokens == 0 && return Dict{String, Float64}()
 
-    for token in tokens
-        tf[token] = get(tf, token, 0.0) + 1.0
-    end
+    token_counts = countmap(String.(tokens))
+    scaling = 1.0 / total_tokens
 
-    for token in keys(tf)
-        tf[token] = tf[token] / total
-    end
-
-    return tf
+    return Dict(token => count * scaling for (token, count) in token_counts)
 end
