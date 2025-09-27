@@ -1,0 +1,19 @@
+{
+  "server": {
+    "port": 8080,
+    "host": "0.0.0.0"
+  },
+  "fetcher": {
+    "enabled": true,
+    "interval": 1800,
+    "categories": [
+      "cs.AI",
+      "cs.LG",
+      "cs.CL",
+      "cs.CV",
+      "cs.IR",
+      "stat.ML"
+    ],
+    "max_results": 200
+  }
+}
